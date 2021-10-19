@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+            <script>
+      function validarSiNumero(numero){
+        if (!/^([0-9])*$/.test(numero))
+          alert("El valor " + numero + " no es un número");
+      }
+    </script>
+    </h:head>
+    <h:body>
+        <h:form >
+            <center>
+                <br></br>
+                <br></br>
+                <div style="border: black 5px double; width: 900px;"> 
+                    <h:commandButton value="Nuevo" action="#{beanCentrosReferencia.Blanquear()}"></h:commandButton>
+                    <h:commandButton value="Buscar"></h:commandButton>
+                    <h:commandButton value="Salvar" action="#{beanCentrosReferencia.Validar()}"></h:commandButton>
+                    <h:commandButton value="Ayuda"></h:commandButton>
+                    <h:commandButton value="Salir"></h:commandButton>
+               
+                </div>
+                
+                
+                <div style="  background-color: blue; width: 900px; height: 10px;" ></div>
+                <div style=" border: black 5px double; width: 900px; height: 700px; " >
+                   
+                    Tipo de referencia: 
+                    <h:selectOneMenu style="margin-left: 10px;" onchange="submit()" value="#{beanCentrosReferencia.tipoReeferencia}">
+                        <f:selectItem itemValue=""> </f:selectItem>   
+                        <f:selectItem itemValue="Externo"> </f:selectItem>                                               
+                        <f:selectItem itemValue="Interno">  </f:selectItem>
+                    </h:selectOneMenu>
+                  
+                    Tipo Consulta: 
+                    <h:selectOneMenu style="margin-left: 10px;" onchange="submit()" value="#{beanCentrosReferencia.tipoConsulta}">
+                         <f:selectItem itemValue=""> </f:selectItem>   
+                        <f:selectItem itemValue="Consulta Presencial"></f:selectItem>
+                        <f:selectItem itemValue="Teleconsulta"></f:selectItem>
+                    </h:selectOneMenu>
+                     <br></br>
+                     <h:selectOneRadio onchange="submit()" value="#{beanCentrosReferencia.radioRef}">
+                         <f:selectItem itemLabel="Referencia" itemValue="Referencia" ></f:selectItem>
+                         <f:selectItem itemLabel="Contra-Referencia" itemValue="Contra-Referencia" ></f:selectItem>
+                     </h:selectOneRadio>
+                    
+                <br></br>
+                Riesgo Excluido: 
+                <h:selectOneMenu  style="margin-left: 10px;" onchange="submit()" value="#{beanCentrosReferencia.riesgoIncluido}">
+                    <f:selectItem itemValue=""> </f:selectItem>   
+                    <f:selectItem  itemValue="Laboral"></f:selectItem>
+                     <f:selectItem itemValue="Taurino"></f:selectItem>
+                      <f:selectItem itemValue="Transito"></f:selectItem>
+                </h:selectOneMenu>    
+                <br></br><br></br>
+                <div style="background-color: blue; color:white; width: 900px;">  Criterio de Priorizacion</div> 
+                <br></br>
+                
+               Consulta Externa
+               <h:selectOneMenu style="margin-left: 10px;" onchange="submit()" value="#{beanCentrosReferencia.critPriConsExterna}">
+                    <f:selectItem itemValue=""> </f:selectItem>    
+                   <f:selectItem itemValue="A Cupo"></f:selectItem>
+                    <f:selectItem itemValue="Double Click to edit"></f:selectItem>
+                </h:selectOneMenu>
+               
+           Urgencias
+           <h:selectOneMenu style="margin-left: 10px;" onchange="submit()" value="#{beanCentrosReferencia.critPriUrgencias}" >
+                <f:selectItem itemValue=""> </f:selectItem>       
+               <f:selectItem itemValue="Rojo"></f:selectItem>
+                    <f:selectItem itemValue="Amarillo"></f:selectItem>
+                    <f:selectItem itemValue="Verde"></f:selectItem>
+                </h:selectOneMenu>
+           <br></br><br></br> 
+        
+           <div style="background-color: blue; width: 900px; height: 10px;"></div>     
+           <br></br>  
+           <div style= "border: black 4px double;">
+           <p style=" font-weight: bold; margin-right: 500px;">PARTE || Centro que refiere o contra-refiere
+            </p>
+           <br></br>    
+            
+            
+            <div style="left: 280px;">  
+                Nombre Del Centro De Salud: 
+                <h:inputText  style="width: 40px;"  onchange="validarSiNumero(this.value)"
+                                value="#{beanCentrosReferencia.codCentroSalud}">
+                </h:inputText>
+                <h:inputText style="margin-left: 10px; width: 400px;" value="#{beanCentrosReferencia.nomCentroSalud}"></h:inputText>
+                <h:commandButton style="margin-left: 10px;" value="Buscar" action="#{beanCentrosReferencia.ValidarNombredelCentroSalud1()}" ></h:commandButton>
+               
+            </div>
+            <br></br>  
+         
+           
+            <div style=" left: 280px;">    
+                Area de Atencion: 
+                <h:selectOneMenu onchange="submit()" value="#{beanCentrosReferencia.areaAtencion}">
+               <f:selectItem itemValue=""> </f:selectItem>   
+                    <f:selectItem itemValue="Consulta Externa"></f:selectItem>
+               <f:selectItem itemValue="Hospitalizacion"></f:selectItem>
+               <f:selectItem itemValue="Urgencias"></f:selectItem>
+           </h:selectOneMenu>
+      
+           Codigo Funcionario:     
+           <h:inputText style="width: 40px;" onchange="validarSiNumero(this.value)" value="#{beanCentrosReferencia.codFuncionario}"></h:inputText>
+           <h:commandButton style="margin-left: 10px;" value="Buscar" action="#{beanCentrosReferencia.ValidarFuncionario1()}"></h:commandButton>
+           
+            Nombre Funcionario:  
+            <h:inputText style="margin-left: 10px; width: 200px;" value="#{beanCentrosReferencia.nomFuncionario}"></h:inputText>
+           <br></br>
+            
+           
+               </div>   
+            <br></br>  
+                 
+                 <div style="  left: 280px;">
+                     Servicio:   
+                     <h:inputText style="width: 40px;" onchange="validarSiNumero(this.value)" value="#{beanCentrosReferencia.codServicio}"></h:inputText> 
+                     <h:inputText style="width: 200px; margin-left: 10px;" value="#{beanCentrosReferencia.nomServicio}"></h:inputText> 
+                     <h:commandButton style="margin-left: 10px;" value="Buscar" action="#{beanCentrosReferencia.ValidarServicio1()}"></h:commandButton>
+                  
+                   Especialidad:  
+                   <h:inputText style="width: 40px;" onchange="validarSiNumero(this.value)" value="#{beanCentrosReferencia.codEspecialidad}"></h:inputText> 
+                   <h:inputText style="width: 205px; margin-left: 10px;" value="#{beanCentrosReferencia.nomEspecialidad}"></h:inputText> 
+                   <h:commandButton style="margin-left: 10px;" value="Buscar" action="#{beanCentrosReferencia.ValidarEspecialidad1()}"></h:commandButton>
+                  <br></br>     
+                 <br></br>  
+                  Numero de Telefono del Profesional: 
+                  <h:inputText style="width: 100px;" onchange="validarSiNumero(this.value)" value="#{beanCentrosReferencia.numTeldelProfesional}" maxlength="9"  ></h:inputText> 
+                   Extencion:
+                   <h:inputText style="margin-left: 10px; width: 80px;" value="#{beanCentrosReferencia.extension}"  maxlength="5"></h:inputText> 
+                 
+                 </div>  
+             
+                </div>
+             <br></br>  
+           <div style="border: black 4px double;">  
+          <p style="font-weight: bold; margin-right: 600px;">PARTE ||| Centro al que refiere o contra-refiere</p>
+           <br></br>   
+          <div style=" left: 280px;">  
+          
+            Nombre Del Centro De Salud: 
+            <h:inputText style="width: 40px;" onchange="validarSiNumero(this.value)" value="#{beanCentrosReferencia.codCentroSalud2}"></h:inputText>
+            <h:inputText style="margin-left: 10px; width: 400px;" value="#{beanCentrosReferencia.nomCentroSalud2}"></h:inputText>
+            <h:commandButton style="margin-left: 10px;" value="Buscar" action="#{beanCentrosReferencia.ValidarNombredelCentroSalud2()}" ></h:commandButton>
+           </div>
+           <br></br>  
+           
+            <div style="  left: 280px;">    
+            
+           Area de Atencion: 
+           <h:selectOneMenu onchange="submit()" value="#{beanCentrosReferencia.areaAtencion2}">
+               <f:selectItem itemValue=""> </f:selectItem>   
+               <f:selectItem itemValue="Consulta Externa"></f:selectItem>
+               <f:selectItem itemValue="Hospitalizacion"></f:selectItem>
+               <f:selectItem itemValue="Urgencias"></f:selectItem>
+           </h:selectOneMenu>
+               </div>
+           <br></br> 
+          
+            <div style=" left: 280px;">
+                    
+                Servicio:   
+                <h:inputText style="width: 40px;" onchange="validarSiNumero(this.value)" value="#{beanCentrosReferencia.codServicio2}"></h:inputText> 
+                <h:inputText style="width: 200px; margin-left: 10px;" value="#{beanCentrosReferencia.nomServicio2}"></h:inputText> 
+                <h:commandButton style="margin-left: 10px;" value="Buscar" action="#{beanCentrosReferencia.ValidarServicio2()}"></h:commandButton>
+                 
+                   Especialidad:  
+                   <h:inputText style="width: 40px;" onchange="validarSiNumero(this.value)" value="#{beanCentrosReferencia.codEspecialidad2}"></h:inputText> 
+                   <h:inputText style="width: 205px; margin-left: 10px;" value="#{beanCentrosReferencia.nomEspecialidad2}"></h:inputText> 
+                   <h:commandButton style="margin-left: 10px;" value="Buscar" action="#{beanCentrosReferencia.ValidarEspecialidad2()}"></h:commandButton>
+                  <br></br>    
+                 <br></br>  
+                  Codigo del Funcionario REDES: 
+                  <h:inputText style="width: 100px;" onchange="validarSiNumero(this.value)" value="#{beanCentrosReferencia.codFuncionarioRed}"></h:inputText> 
+                  <h:commandButton style="margin-left: 10px;" value="Buscar" action="#{beanCentrosReferencia.ValidarFuncionario2()}"></h:commandButton>
+               
+                  Nombre del Funcionario:
+                  <h:inputText style="margin-left: 10px; width: 200px;" value="#{beanCentrosReferencia.nomFuncionarioRed}"></h:inputText> 
+                 <br></br>  <br></br>  
+                 </div> 
+               </div>
+            <h4 style="color: red;">#{beanCentrosReferencia.mensaje} </h4>
+            <br></br><br></br>
+                </div>    
+                 <div style="background-color: blue; width: 900px; height: 10px;"></div>
+           
+            </center>
+            
+        </h:form>
+    </h:body>
+</html>
+
